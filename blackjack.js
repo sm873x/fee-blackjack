@@ -1,5 +1,5 @@
 
-function runGame() {
+(function runGame() {
 
     var display = document.getElementById('cards');
     cards = ['A', '2','3', '4','5',"6",'7','7','8', '9', "10", 'J', 'Q', 'K']
@@ -61,4 +61,4 @@ function runGame() {
     display.innerHTML = cards[card];
     card = Math.round(Math.random() * cards.length);
     display.innerHTML = display.innerHTML + ' ' + cards[card];
-}
+})();
