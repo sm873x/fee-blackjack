@@ -2,11 +2,19 @@
 (function runGame() {
 
     var display = document.getElementById('cards');
-    cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+    var cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+
+    function randomCard() {
+        var card = Math.floor(Math.random() * cards.length);
+        return cards[card];
+    }
+
+    display.innerHTML = randomCard();
+
+    display.innerHTML = display.innerHTML + ' ' + randomCard();
 
     function hit() {
-        var card = Math.round(Math.random() * cards.length);
-        display.innerHTML = cards[card];
+        display.innerHTML = randomCard();
         checkResult(false, true);
     }
 
@@ -22,16 +30,19 @@
 
         var cardValue = 0;
 
-        cards.forEach(function (card, i) {
-            if (Number(card)) {
-                cardValue = cardValue + card;
+        var i;
+        card = cards[i];
+        for (i=0; i<cards.length; i++) {
+            if ( Number(card) ) {
+                cardValue += Number(card);
+            } else if (card === 'J' || card == 'Q' || card === 'K') {
+                cardValue += 10;
+            } else {
+                cardValue += 11;
             }
+        };
 
-            if (card === 'J' || card == 'Q' || card === 'J')
-                cardValue = cardValue + 10;
-
-            if (cards[i] = 'A') { cardValue = cardValue += 11; }
-        });
+        // var totalCardValue =
 
         if (cardValue < 15 && standing) {
             alert('Dealer wins.');
@@ -47,8 +58,7 @@
         }
 
     display.innerHTML = '';
-    card = Math.round(Math.random() * cards.length);
-    display.innerHTML = cards[card];
+    display.innerHTML = randomCard();
     }
 
     document.getElementById('stand').addEventListener('click', function() {
@@ -60,13 +70,5 @@
     });
 
 
-    var randomCard = Math.round(Math.random() * cards.length);
-    //Card1
-    card = randomCard;
-    display.innerHTML = cards[card];
-    console.log( card );
-    //Card2
-    card = randomCard;
-    display.innerHTML = display.innerHTML + ' ' + cards[card];
-    console.log( card );
+
 })();
