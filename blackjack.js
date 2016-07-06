@@ -2,12 +2,12 @@
 (function runGame() {
 
     var display = document.getElementById('cards');
-    cards = ['A', '2','3', '4','5',"6",'7','7','8', '9', "10", 'J', 'Q', 'K']
+    cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
     function hit() {
         var card = Math.round(Math.random() * cards.length);
         display.innerHTML = cards[card];
-        checkResult('no', true);
+        checkResult(false, true);
     }
 
     /**
@@ -52,13 +52,21 @@
     }
 
     document.getElementById('stand').addEventListener('click', function() {
-        checkREsult(true);
+        checkResult(true, false);
     });
 
-    document.getElementById('hit').addEventListener('click',function(){checkResult(null, true);});
+    document.getElementById('hit').addEventListener('click',function() {
+        checkResult(false, true);
+    });
 
-    card = Math.round(Math.random() * cards.length);
+
+    var randomCard = Math.round(Math.random() * cards.length);
+    //Card1
+    card = randomCard;
     display.innerHTML = cards[card];
-    card = Math.round(Math.random() * cards.length);
+    console.log( card );
+    //Card2
+    card = randomCard;
     display.innerHTML = display.innerHTML + ' ' + cards[card];
+    console.log( card );
 })();
