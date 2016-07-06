@@ -4,6 +4,7 @@
     var display = document.getElementById('cards');
     var cards = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
+
     function randomCard() {
         var card = Math.floor(Math.random() * cards.length);
         return cards[card];
@@ -13,10 +14,7 @@
 
     display.innerHTML = display.innerHTML + ' ' + randomCard();
 
-    function hit() {
-        display.innerHTML = randomCard();
-        checkResult(false, true);
-    }
+    checkResult(false, false);
 
     /**
      * Check the result of the current cards and alert the game result
@@ -28,11 +26,11 @@
     function checkResult(standing, hitting) {
         cards = display.innerHTML.split(' ');
 
-        var cardValue = 0;
-
-        var i;
-        card = cards[i];
+        var cardValue = 0;//total card value
+        
+        var i, card;
         for (i=0; i<cards.length; i++) {
+            card = cards[i];
             if ( Number(card) ) {
                 cardValue += Number(card);
             } else if (card === 'J' || card == 'Q' || card === 'K') {
@@ -41,24 +39,26 @@
                 cardValue += 11;
             }
         };
-
-        // var totalCardValue =
-
-        if (cardValue < 15 && standing) {
+        // console.log(cardValue);
+        // cardValue = 19;
+        if ( cardValue < 16 && standing) {
+            // console.log( typeof(standing) );
             alert('Dealer wins.');
-        }
-        if (cardValue < 18 && standing) {
+        } else if ( cardValue <= 18 && standing) {
             alert('Push!');
-        }
-        if (cardValue > 18 & hitting || cardValue === 21) {
+        } else if ( (cardValue > 18 && standing) || cardValue === 21) {
             alert('You win!');
-        }
-        if (cardValue > 21) {
+        } else if (cardValue > 21) {
             alert('You Bust.');
         }
 
-    display.innerHTML = '';
     display.innerHTML = randomCard();
+    display.innerHTML = display.innerHTML + ' ' + randomCard();
+    }
+
+    function hit() {
+        display.innerHTML = display.innerHTML + ' ' + randomCard();
+        checkResult(false, true);
     }
 
     document.getElementById('stand').addEventListener('click', function() {
@@ -66,6 +66,7 @@
     });
 
     document.getElementById('hit').addEventListener('click',function() {
+        hit ();
         checkResult(false, true);
     });
 
