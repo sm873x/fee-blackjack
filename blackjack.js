@@ -26,11 +26,9 @@
 
         var cardValue = 0;
 
-        // var i, card;
-        // for (i=0; i<cards.length; i++) {
-        //     card = cards[i];
-
-         cards.forEach(function (card, i) {
+        var i, card;
+        for (i=0; i<cards.length; i++) {
+            card = cards[i];    
             if ( Number(card) ) {
                 cardValue += Number(card);
             } else if (card === 'J' || card == 'Q' || card === 'K') {
@@ -39,7 +37,9 @@
                 cardValue += 11;
             }
         });
+
         console.log(cardValue);
+
 
         if ( cardValue < 16 && standing ) {
             alert('Dealer wins.');
@@ -58,7 +58,6 @@
     }
 
     function hit() {
-
         display.innerHTML = display.innerHTML + ' ' + randomCard();
         checkResult(false, true);
     }
